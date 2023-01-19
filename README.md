@@ -1,5 +1,5 @@
 # Tretyakov-Gallery-test
-Тестовое задание для Третьяковской Галереии 
+Тестовое задание для Третьяковской Галереи
 
 ## Задание
 
@@ -40,3 +40,17 @@
 - Backend
     - PHP
     - MySQL
+
+## Запуск проекта
+
+- Билд проекта `docker-compose build`
+- Запуск проекта `docker-compose up`
+- После загрузки и инициализации всех контейнеров можно сдампить БД ` cat dump.sql | docker exec -i db mysql -u root --password=r12345678 tretyakov_gallery`
+- Бэк доступен по адресу `localhost:8000`
+- Фронт доступен по адресу `localhost:3000`
+
+## Архитектура проекта
+
+ - Docker контейнер Nuxt -> `port: 3000`
+ - Docker контейнер MYSQL -> `port: 3306`
+ - Docker контейнер Apache + PHP -> `port: 8000`
