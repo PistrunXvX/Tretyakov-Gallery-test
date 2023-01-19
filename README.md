@@ -45,7 +45,7 @@
 
 - Билд проекта `docker-compose build`
 - Запуск проекта `docker-compose up`
-- После загрузки и инициализации всех контейнеров можно сдампить БД ` cat dump.sql | docker exec -i db mysql -u root --password=r12345678 tretyakov_gallery`
+- После загрузки и инициализации всех контейнеров можно сдампить БД ` cat dump.sql | docker exec -i "<container_name>_mysql_1" mysql -u root --password=r12345678 tretyakov_gallery`
 - Бэк доступен по адресу `localhost:8000`
 - Фронт доступен по адресу `localhost:3000`
 
