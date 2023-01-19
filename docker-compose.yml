@@ -1,0 +1,51 @@
+version: '3.5'
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: PHP.Dockerfile
+    ports:
+      - '8000:80'
+    volumes:
+      - '/api'
+    networks:
+      - php_network
+    
+  mysql:
+    image: mysql:latest
+    container_name: db
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_DATABASE=tretyakov_gallery
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=12345678
+      - MYSQL_ROOT_PASSWORD=r12345678
+    ports:
+      - '3306:3306'
+    networks:
+      - php_network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: 'develop-stage'
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    ports:
+      - '3000:3000'
+    volumes:
+      - '.:/$$APPNAME'
+      - '/$$APPNAME/node_modules/'
+    command: ["npm", "run", "dev"]
+    networks:
+      - php_network
+
+volumes:
+  mysql_php:
+
+networks:
+  php_network:
+    driver: bridge
+    
